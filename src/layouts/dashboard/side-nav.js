@@ -43,7 +43,7 @@ export const SideNav = (props) => {
         }}
       >
         <Box sx={{ p: 3 }}>
-          <Box
+          {/* <Box
             component={NextLink}
             href="/"
             sx={{
@@ -53,7 +53,13 @@ export const SideNav = (props) => {
             }}
           >
             <Logo />
-          </Box>
+          </Box> */}
+          <Typography
+            color="neutral.100"
+            variant="h5"
+          >
+            NetBench
+          </Typography>
           {/* <Box
             sx={{
               alignItems: 'center',

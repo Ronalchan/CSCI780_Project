@@ -119,7 +119,7 @@ export const OverviewSales = (props) => {
             Sync
           </Button>
         )}
-        title="Dataset Distribution"
+        title="Dataset Distribution (Flow-level)"
       />
       <CardContent>
         <Chart
