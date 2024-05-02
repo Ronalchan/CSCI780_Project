@@ -22,7 +22,7 @@ export const OverviewBudget = (props) => {
               color="text.secondary"
               variant="overline"
             >
-              Dataset Size
+              Dataset Counts
             </Typography>
             <Typography variant="h4">
               {value}

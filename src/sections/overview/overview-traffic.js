@@ -10,9 +10,43 @@ import {
   Stack,
   SvgIcon,
   Typography,
-  useTheme
+  useTheme,
+  Select,
+  MenuItem
 } from '@mui/material';
+import { useState } from 'react';
 import { Chart } from 'src/components/chart';
+
+const datasets = {
+  'ISCXVPN': {
+    labels: ['VPN Detection', 'VPN Service Detection', 'VPN Application Classification'],
+    values: [2, 6, 17],
+  },
+  'ISCXTor': {
+    labels: ['Tor Detection', 'Tor Service Detection'],
+    values: [2, 7],
+  },
+  'USTC-TFC': {
+    labels: ['Malware Detection', 'Application Classification'],
+    values: [2, 20],
+  },
+  'Cross Platform (Android)': {
+    labels: ['Application Classification', 'Country Detection'],
+    values: [212, 3],
+  },
+  'Cross Platform (iOS)': {
+    labels: ['Application Classification', 'Country Detection'],
+    values: [196, 3],
+  },
+  'CIRA-CIC-DoHBrw': {
+    labels: ['DoH Attack Detection', 'DoH Query Method Classification'],
+    values: [2, 5],
+  },
+  'CIC IoT Dataset': {
+    labels: ['IoT Attack Detection', 'IoT Attack Method Detection'],
+    values: [2, 7],
+  },
+};
 
 const useChartOptions = (labels) => {
   const theme = useTheme();
@@ -81,17 +115,31 @@ const iconMap = {
 };
 
 export const OverviewTraffic = (props) => {
-  const { chartSeries, labels, sx } = props;
-  const chartOptions = useChartOptions(labels);
+  const { chartSeries, labels, sx, dataset, setDataset } = props;
+  const chartOptions = useChartOptions(datasets[dataset].labels);
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Network Traffic Data Source" />
+      <CardHeader 
+        title="Number of Labels"
+        action={
+          <Select
+            value={dataset}
+            onChange={(e) => setDataset(e.target.value)}
+          >
+            {Object.keys(datasets).map(key => (
+              <MenuItem value={key} key={key}>
+                {key}
+              </MenuItem>
+            ))}
+          </Select>
+        }
+      />
       <CardContent>
         <Chart
           height={300}
           options={chartOptions}
-          series={chartSeries}
+          series={datasets[dataset].values}
           type="donut"
           width="100%"
         />
@@ -102,8 +150,8 @@ export const OverviewTraffic = (props) => {
           spacing={2}
           sx={{ mt: 2 }}
         >
-          {chartSeries.map((item, index) => {
-            const label = labels[index];
+          {datasets[dataset].values.map((item, index) => {
+            const label = datasets[dataset].labels[index];
 
             return (
               <Box
@@ -117,15 +165,15 @@ export const OverviewTraffic = (props) => {
                 {iconMap[label]}
                 <Typography
                   sx={{ my: 1 }}
-                  variant="h6"
+                  variant="body1"
                 >
                   {label}
                 </Typography>
                 <Typography
                   color="text.secondary"
-                  variant="subtitle2"
+                  variant="body1"
                 >
-                  {item}%
+                  {item}
                 </Typography>
               </Box>
             );
@@ -139,5 +187,7 @@ export const OverviewTraffic = (props) => {
 OverviewTraffic.propTypes = {
   chartSeries: PropTypes.array.isRequired,
   labels: PropTypes.array.isRequired,
-  sx: PropTypes.object
+  sx: PropTypes.object,
+  dataset: PropTypes.string.isRequired,
+  setDataset: PropTypes.func.isRequired,
 };

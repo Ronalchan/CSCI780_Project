@@ -3,6 +3,7 @@ import CircleStackIcon from '@heroicons/react/24/solid/CircleStackIcon';
 import FlagIcon from '@heroicons/react/24/solid/FlagIcon';
 import RocketLaunchIcon from '@heroicons/react/24/solid/RocketLaunchIcon';
 import DocumentChartBarIcon from '@heroicons/react/24/solid/DocumentChartBarIcon';
+import ArrowDownTrayIcon from '@heroicons/react/24/solid/ArrowDownTrayIcon';
 import { SvgIcon } from '@mui/material';
 
 export const items = [
@@ -16,8 +17,8 @@ export const items = [
     )
   },
   {
-    title: 'Dataset',
-    path: '/',
+    title: 'Datasets',
+    path: '/dataset',
     icon: (
       <SvgIcon fontSize="small">
         <CircleStackIcon />
@@ -25,8 +26,8 @@ export const items = [
     )
   },
   {
-    title: 'Process',
-    path: '/',
+    title: 'Data Process',
+    path: '/process',
     icon: (
       <SvgIcon fontSize="small">
         <FlagIcon />
@@ -35,7 +36,7 @@ export const items = [
   },
   {
     title: 'Evaluation',
-    path: '/',
+    path: '/evaluation',
     icon: (
       <SvgIcon fontSize="small">
         <RocketLaunchIcon />
@@ -44,10 +45,19 @@ export const items = [
   },
   {
     title: 'Report',
-    path: '/',
+    path: '/report',
     icon: (
       <SvgIcon fontSize="small">
         <DocumentChartBarIcon />
+      </SvgIcon>
+    )
+  },
+  {
+    title: 'Download',
+    path: 'https://github.com/WM-JayLab/NetBench',
+    icon: (
+      <SvgIcon fontSize="small">
+        <ArrowDownTrayIcon />
       </SvgIcon>
     )
   },

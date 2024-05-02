@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
 import ClockIcon from '@heroicons/react/24/solid/ClockIcon';
-import { Avatar, Box, Card, CardContent, Divider, Stack, SvgIcon, Typography } from '@mui/material';
+import { Avatar, Box, Card, CardContent, Divider, Stack, SvgIcon, Typography, Link } from '@mui/material';
 
 export const CompanyCard = (props) => {
   const { company } = props;
@@ -32,7 +32,13 @@ export const CompanyCard = (props) => {
           gutterBottom
           variant="h5"
         >
-          {company.title}
+          {company.url ? (
+              <Link href={company.url} target="_blank" rel="noopener noreferrer">
+                  {company.title}
+              </Link>
+          ) : (
+              company.title
+          )}
         </Typography>
         <Typography
           align="center"
@@ -42,7 +48,7 @@ export const CompanyCard = (props) => {
         </Typography>
       </CardContent>
       <Box sx={{ flexGrow: 1 }} />
-      <Divider />
+      {/* <Divider />
       <Stack
         alignItems="center"
         direction="row"
@@ -88,7 +94,7 @@ export const CompanyCard = (props) => {
             {company.downloads} Downloads
           </Typography>
         </Stack>
-      </Stack>
+      </Stack> */}
     </Card>
   );
 };

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import ArrowPathIcon from '@heroicons/react/24/solid/ArrowPathIcon';
+import ArrowsRightLeftIcon from '@heroicons/react/24/solid/ArrowsRightLeftIcon';
 import ArrowRightIcon from '@heroicons/react/24/solid/ArrowRightIcon';
 import {
   Button,
@@ -11,6 +12,7 @@ import {
   SvgIcon
 } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
+import { useState } from 'react'; // Import useState for state management
 import { Chart } from 'src/components/chart';
 
 const useChartOptions = () => {
@@ -72,13 +74,13 @@ const useChartOptions = () => {
         show: true
       },
       categories: [
-        'ISCXVPN 2016',
-        'ISCXTor 2016',
-        'USTC-TFC 2016',
-        'Cross Platform (Android) 2020',
-        'Cross Platform (iOS) 2020',
-        'CIRA-CIC-DoHBrw 2020',
-        'CIC IoT Dataset 2023',
+        'ISCXVPN',
+        'ISCXTor',
+        'USTC-TFC',
+        'Cross Platform (Android)',
+        'Cross Platform (iOS)',
+        'CIRA-CIC-DoHBrw',
+        'CIC IoT Dataset',
       ],
       labels: {
         offsetY: 5,
@@ -100,8 +102,24 @@ const useChartOptions = () => {
 };
 
 export const OverviewSales = (props) => {
-  const { chartSeries, sx } = props;
+  const { sx } = props;
   const chartOptions = useChartOptions();
+
+  // Introduce a state variable to toggle between Flow Level and Packet Level
+  const [view, setView] = useState("Flow Level");
+
+  const toggleView = () => {
+    setView((prevView) => (prevView === "Flow Level" ? "Packet Level" : "Flow Level"));
+  };
+
+  // Chart data based on the current view
+  const chartSeries = view === "Flow Level" ? [{
+      name: 'Flow Level',
+      data: [311390, 55523, 489139, 66346, 34912, 831497, 1163495]
+  }] : [{
+      name: 'Packet Level',
+      data: [1040354, 1163495, 4564519, 1358292, 971762, 32962034, 27738736]
+  }];
 
   return (
     <Card sx={sx}>
@@ -112,14 +130,15 @@ export const OverviewSales = (props) => {
             size="small"
             startIcon={(
               <SvgIcon fontSize="small">
-                <ArrowPathIcon />
+                <ArrowsRightLeftIcon />
               </SvgIcon>
             )}
+            onClick={toggleView} // Set the button to toggle view
           >
-            Sync
+            Switch
           </Button>
         )}
-        title="Dataset Distribution (Flow-level)"
+        title={`Dataset Distribution (${view})`} // Change the title to reflect current view
       />
       <CardContent>
         <Chart
@@ -131,7 +150,7 @@ export const OverviewSales = (props) => {
         />
       </CardContent>
       <Divider />
-      <CardActions sx={{ justifyContent: 'flex-end' }}>
+      {/* <CardActions sx={{ justifyContent: 'flex-end' }}>
         <Button
           color="inherit"
           endIcon={(
@@ -143,7 +162,7 @@ export const OverviewSales = (props) => {
         >
           Overview
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };
