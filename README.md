@@ -5,3 +5,9 @@
 ![Website1](public/assets/website_1.gif)
 
 ![Website2](public/assets/website_2.gif)
+
+### How to run
+```
+npm run install
+npm run dev
+```
