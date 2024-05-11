@@ -68,7 +68,7 @@ const Page = () => {
             >
               <OverviewTasksProgress
                 sx={{ height: '100%' }}
-                value={'2,952 K'}
+                value={'2.952 M'}
               />
             </Grid>
             <Grid
@@ -78,7 +78,7 @@ const Page = () => {
             >
               <OverviewTotalProfit
                 sx={{ height: '100%' }}
-                value="69,799 K"
+                value="69.799 M"
               />
             </Grid>
             <Grid
